@@ -4,14 +4,17 @@ use Module::Install::AuthorTests;
 name 'Amon2-DBI';
 all_from 'lib/Amon2/DBI.pm';
 
-# requires '';
-# requires 'Exporter' => 5.63; # use Exporter 'import';
-# requires 'Plack' =>  0.9949;
-
-
+requires(
+    'DBI'                      => 0,
+    'DBD::SQLite'              => 0,
+    'SQL::Interp'              => 0,
+    'DBIx::TransactionManager' => 0,
+	'parent'                   => 0,
+	'Carp::Clan'               => 0,
+);
 
 tests 't/*.t t/*/*.t t/*/*/*.t t/*/*/*/*.t';
 test_requires 'Test::More' => 0.96; # done_testing, subtest
-# test_requires 'Test::Requires';
+test_requires 'Test::Requires';
 author_tests('xt');
 WriteAll;
