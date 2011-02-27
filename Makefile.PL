@@ -6,7 +6,6 @@ all_from 'lib/Amon2/DBI.pm';
 
 requires(
     'DBI'                      => 0,
-    'DBD::SQLite'              => 0,
     'SQL::Interp'              => 0,
     'DBIx::TransactionManager' => 0,
 	'parent'                   => 0,
