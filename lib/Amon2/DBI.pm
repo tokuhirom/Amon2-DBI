@@ -45,7 +45,10 @@ sub disconnect {
 
 sub _txn_manager {
     my $self = shift;
-    $self->{private_txn_manager} //= DBIx::TransactionManager->new($self);
+    if (!defined $self->{private_txn_manager}) {
+        $self->{private_txn_manager} = DBIx::TransactionManager->new($self);
+    }
+    return $self->{private_txn_manager};
 }
 
 sub txn_scope { $_[0]->_txn_manager->txn_scope(caller => [caller(0)]) }
