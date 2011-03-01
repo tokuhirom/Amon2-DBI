@@ -141,9 +141,9 @@ Amon2::DBI set sqlite_unicode and mysql_enable_utf8 automatically.
 
 Amon2::DBI supports nested transaction management based on RAII like DBIx::Class or DBIx::Skinny. It uses L<DBIx::TransactionManager> internally.
 
-=item Raising error when you ocurred.
+=item Raising error when you occurred.
 
-Amon2::DBI raises exeception if your $dbh occurred exception.
+Amon2::DBI raises exception if your $dbh occurred exception.
 
 =back
 

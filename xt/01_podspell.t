@@ -34,3 +34,6 @@ API
 URL
 URI
 db
+SQL
+RAII
+AutoInactiveDestroy
