@@ -34,6 +34,7 @@ use SQL::Interp ();
 sub connected {
     my $dbh = shift;
     $dbh->{private_connect_info} = [@_];
+    $dbh->SUPER::connected(@_);
 }
 
 sub connect_info { $_[0]->{private_connect_info} }
