@@ -1,5 +1,9 @@
 Revision history for Perl extension Amon2::DBI
 
+0.04
+
+    - call $dbh->SUPER::connected().  (kazeburo)
+
 0.03
 
     - do not use '//' on 5.8 modules! orz.

@@ -19,6 +19,7 @@ README.pod
 t/00_compile.t
 t/01_simple.t
 t/02_integrate.t
+t/03_callbacks.t
 xt/01_podspell.t
 xt/02_perlcritic.t
 xt/03_pod.t
