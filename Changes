@@ -1,5 +1,9 @@
 Revision history for Perl extension Amon2::DBI
 
+0.05
+
+    - specify the version number of depended moduels
+
 0.04
 
     - call $dbh->SUPER::connected().  (kazeburo)
