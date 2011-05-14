@@ -5,9 +5,9 @@ name 'Amon2-DBI';
 all_from 'lib/Amon2/DBI.pm';
 
 requires(
-    'DBI'                      => 0,
-    'SQL::Interp'              => 0,
-    'DBIx::TransactionManager' => 0,
+    'DBI'                      => '1.616',
+    'SQL::Interp'              => '1.10',
+    'DBIx::TransactionManager' => '1.09',
 	'parent'                   => 0,
 	'Carp::Clan'               => 0,
 );
