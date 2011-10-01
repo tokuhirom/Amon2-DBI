@@ -24,4 +24,34 @@ sub _dbh {
 }
 
 1;
+__DATA__
+
+@@ prereq_pm
+        'Amon2::DBI'                      => '0',
+@@ context
+__PACKAGE__->load_plugin('DBI');
+
+@@ config_development
+    'DBI' => [
+        "dbi:SQLite:dbname=@{[ <: $module :>->base_dir ]}/development.db",
+        '',
+        '',
+        +{ sqlite_unicode => 1 },
+    ],
+
+@@ config_deployment
+    'DBI' => [
+        "dbi:SQLite:dbname=@{[ <: $module :>->base_dir ]}/deployment.db",
+        '',
+        '',
+        +{ sqlite_unicode => 1 },
+    ],
+
+@@ config_test
+    'DBI' => [
+        "dbi:SQLite:dbname=@{[ <: $module :>->base_dir ]}/test.db",
+        '',
+        '',
+        +{ sqlite_unicode => 1 },
+    ],
 
