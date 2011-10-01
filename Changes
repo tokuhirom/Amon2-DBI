@@ -1,5 +1,9 @@
 Revision history for Perl extension Amon2::DBI
 
+0.06
+
+    - [BUG FIX] fixed error handler on mysql
+
 0.05
 
     - specify the version number of depended moduels
