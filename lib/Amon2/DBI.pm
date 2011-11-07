@@ -12,11 +12,17 @@ sub connect {
     if ($DBI::VERSION >= 1.614) {
         $attr->{AutoInactiveDestroy} = 1 unless exists $attr->{AutoInactiveDestroy};
     }
-    if ($dsn =~ /^dbi:SQLite:/) {
+    if ($dsn =~ /^dbi:SQLite:/i) {
         $attr->{sqlite_unicode} = 1 unless exists $attr->{sqlite_unicode};
     }
-    if ($dsn =~ /^dbi:mysql:/) {
+    elsif ($dsn =~ /^dbi:mysql:/i) {
         $attr->{mysql_enable_utf8} = 1 unless exists $attr->{mysql_enable_utf8};
+    }
+    elsif ($dsn =~ /^dbi:Pg:/i) {
+        my $dbd_pg_version = eval { require DBD::Pg; (DBD::Pg->VERSION =~ /^([.0-9]+)\./)[0] };
+        if ( !$@ and $dbd_pg_version < 2.99 ) { # less than DBD::Pg 2.99, pg_enable_utf8 must be set for utf8.
+            $attr->{pg_enable_utf8} = 1 unless exists $attr->{pg_enable_utf8};
+        }
     }
     my $self = $class->SUPER::connect($dsn, $user, $pass, $attr) or die "Cannot connect to server: $DBI::errstr";
     return $self;
@@ -143,9 +149,10 @@ Amon2::DBI is a simple DBI wrapper. It provides better usability for you.
 
 If your DBI version is higher than 1.614, Amon2::DBI set AutoInactiveDestroy as true.
 
-=item Set sqlite_unicode and mysql_enable_utf8 automatically
+=item Set sqlite_unicode and mysql_enable_utf8 and pg_enable_utf8 automatically
 
 Amon2::DBI set sqlite_unicode and mysql_enable_utf8 automatically.
+If using DBD::Pg version less than 2.99, pg_enable_utf8 too.
 
 =item Nested transaction management.
 

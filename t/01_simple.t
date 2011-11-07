@@ -16,6 +16,7 @@ $dbh->do_i('INSERT INTO foo ', {e => 4});
 is join(',', map { @$_ } @{$dbh->selectall_arrayref('SELECT * FROM foo ORDER BY e')}), '3,4';
 
 subtest 'utf8' => sub {
+    use utf8;
     $dbh->do(q{CREATE TABLE bar (x)});
     $dbh->insert(bar => { x => "こんにちは" });
     my ($x) = $dbh->selectrow_array(q{SELECT x FROM bar});
