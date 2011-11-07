@@ -2,16 +2,14 @@ use strict;
 use warnings;
 use Test::More;
 use Amon2::DBI;
-use Test::Requires 'DBD::mysql', 'DBI', 'Test::mysqld';
+use Test::Requires 'DBD::Pg', 'DBI', 'Test::postgresql';
 
-my $mysqld = Test::mysqld->new(
-    my_cnf => {
-        'skip-networking' => ''
-    }
-) or plan skip_all => $Test::mysqld::errstr;
+my $pg = eval { Test::postgresql->new(
+    initdb_args => $Test::postgresql::Defaults{initdb_args} . ' -E UTF8',
+) } or plan skip_all => $Test::postgresql::errstr;
 
-my $dbh = Amon2::DBI->connect($mysqld->dsn());
-$dbh->do(q{CREATE TABLE foo (e int unsigned not null)});
+my $dbh = Amon2::DBI->connect($pg->dsn);
+$dbh->do(q{CREATE TABLE foo (e int not null)});
 $dbh->insert('foo', {e => 3});
 $dbh->do_i('INSERT INTO foo ', {e => 4});
 is join(',', map { @$_ } @{$dbh->selectall_arrayref('SELECT * FROM foo ORDER BY e')}), '3,4';
