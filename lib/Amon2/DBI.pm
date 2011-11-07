@@ -18,6 +18,12 @@ sub connect {
     elsif ($dsn =~ /^dbi:mysql:/i) {
         $attr->{mysql_enable_utf8} = 1 unless exists $attr->{mysql_enable_utf8};
     }
+    elsif ($dsn =~ /^dbi:Pg:/i) {
+        my $dbd_pg_version = eval { require DBD::Pg; (DBD::Pg->VERSION =~ /^([.0-9]+)\./)[0] };
+        if ( !$@ and $dbd_pg_version < 2.99 ) { # DBD::Pg 2.99+, pg_enable_utf8 is deprecated.
+            $attr->{pg_enable_utf8} = 1 unless exists $attr->{pg_enable_utf8};
+        }
+    }
     my $self = $class->SUPER::connect($dsn, $user, $pass, $attr) or die "Cannot connect to server: $DBI::errstr";
     return $self;
 }
