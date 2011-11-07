@@ -12,10 +12,10 @@ sub connect {
     if ($DBI::VERSION >= 1.614) {
         $attr->{AutoInactiveDestroy} = 1 unless exists $attr->{AutoInactiveDestroy};
     }
-    if ($dsn =~ /^dbi:SQLite:/) {
+    if ($dsn =~ /^dbi:SQLite:/i) {
         $attr->{sqlite_unicode} = 1 unless exists $attr->{sqlite_unicode};
     }
-    if ($dsn =~ /^dbi:mysql:/) {
+    elsif ($dsn =~ /^dbi:mysql:/i) {
         $attr->{mysql_enable_utf8} = 1 unless exists $attr->{mysql_enable_utf8};
     }
     my $self = $class->SUPER::connect($dsn, $user, $pass, $attr) or die "Cannot connect to server: $DBI::errstr";
