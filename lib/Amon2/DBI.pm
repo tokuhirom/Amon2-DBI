@@ -20,7 +20,7 @@ sub connect {
     }
     elsif ($dsn =~ /^dbi:Pg:/i) {
         my $dbd_pg_version = eval { require DBD::Pg; (DBD::Pg->VERSION =~ /^([.0-9]+)\./)[0] };
-        if ( !$@ and $dbd_pg_version < 2.99 ) { # DBD::Pg 2.99+, pg_enable_utf8 is deprecated.
+        if ( !$@ and $dbd_pg_version < 2.99 ) { # less than DBD::Pg 2.99, pg_enable_utf8 must be set for utf8.
             $attr->{pg_enable_utf8} = 1 unless exists $attr->{pg_enable_utf8};
         }
     }
@@ -149,9 +149,10 @@ Amon2::DBI is a simple DBI wrapper. It provides better usability for you.
 
 If your DBI version is higher than 1.614, Amon2::DBI set AutoInactiveDestroy as true.
 
-=item Set sqlite_unicode and mysql_enable_utf8 automatically
+=item Set sqlite_unicode and mysql_enable_utf8 and pg_enable_utf8 automatically
 
 Amon2::DBI set sqlite_unicode and mysql_enable_utf8 automatically.
+If using DBD::Pg version less than 2.99, pg_enable_utf8 too.
 
 =item Nested transaction management.
 
