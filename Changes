@@ -1,5 +1,9 @@
 Revision history for Perl extension Amon2::DBI
 
+0.08
+
+    - fixed charset in 05_mysql.t utf8 subtest(makamaka)
+
 0.07
 
     - added auto pg_enable_utf8 setting(makamaka)
