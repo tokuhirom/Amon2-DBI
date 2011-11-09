@@ -18,7 +18,7 @@ is join(',', map { @$_ } @{$dbh->selectall_arrayref('SELECT * FROM foo ORDER BY 
 
 subtest 'utf8' => sub {
     use utf8;
-    $dbh->do(q{CREATE TABLE bar (x varchar(255))});
+    $dbh->do(q{CREATE TABLE bar (x varchar(255)) DEFAULT CHARACTER SET utf8});
     $dbh->insert(bar => { x => "こんにちは" });
     my ($x) = $dbh->selectrow_array(q{SELECT x FROM bar});
     is $x, "こんにちは";
