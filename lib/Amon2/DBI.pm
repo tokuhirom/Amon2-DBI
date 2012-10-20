@@ -2,7 +2,7 @@ package Amon2::DBI;
 use strict;
 use warnings;
 use 5.008001;
-our $VERSION = '0.08';
+our $VERSION = '0.30';
 
 use parent qw/DBI/;
 

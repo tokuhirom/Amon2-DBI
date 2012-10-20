@@ -1,5 +1,10 @@
 Revision history for Perl extension Amon2::DBI
 
+0.30
+
+    [INCOMPATBILE CHANGE]
+    - do not handle exception in Amon2::DBI, and use RaiseError.
+
 0.08
 
     - fixed charset in 05_mysql.t utf8 subtest(makamaka)
