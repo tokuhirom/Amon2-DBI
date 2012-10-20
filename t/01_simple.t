@@ -27,7 +27,7 @@ eval {
     $dbh->insert('bar', {e => 3});
 }; note $@;
 ok $@, "Dies with unknown table name automatically.";
-like $@, qr/Amon2::DBI 's Exception/;
+like $@, qr/failed/;
 
 $dbh->disconnect();
 ok !$dbh->ping, 'disconnected';

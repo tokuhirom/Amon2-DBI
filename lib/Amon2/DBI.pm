@@ -8,7 +8,9 @@ use parent qw/DBI/;
 
 sub connect {
     my ($class, $dsn, $user, $pass, $attr) = @_;
-    $attr->{RaiseError} = 0;
+    $attr->{RaiseError} = 1;
+    $attr->{PrintError} = 0;
+    $attr->{ShowErrorStatement} = 1;
     if ($DBI::VERSION >= 1.614) {
         $attr->{AutoInactiveDestroy} = 1 unless exists $attr->{AutoInactiveDestroy};
     }
@@ -36,6 +38,7 @@ our @ISA = qw(DBI::db);
 
 use DBIx::TransactionManager;
 use SQL::Interp ();
+use Carp ();
 
 sub connected {
     my $dbh = shift;
@@ -44,11 +47,6 @@ sub connected {
 }
 
 sub connect_info { $_[0]->{private_connect_info} }
-
-sub disconnect {
-    my $self = shift;
-    return $self->SUPER::disconnect() or Carp::croak "Cannot disconnect from database: " . $self->errstr;
-}
 
 sub _txn_manager {
     my $self = shift;
@@ -71,56 +69,10 @@ sub insert {
     $self->do_i("INSERT INTO $table", $vars);
 }
 
-sub prepare {
-    my ($self, @args) = @_;
-    my $sth = $self->SUPER::prepare(@args) or do {
-        Amon2::DBI::Util::handle_error($_[1], [], $self->errstr);
-    };
-    $sth->{private_sql} = $_[1];
-    return $sth;
-}
-
-sub do {
-    my $self = shift;
-    $self->SUPER::do(@_) or do {
-        my ($sql, $holder, @args) = @_;
-        Amon2::DBI::Util::handle_error($sql, \@args, $self->errstr);
-    };
-}
-
 package Amon2::DBI::st; # statement handler
 our @ISA = qw(DBI::st);
 
-sub execute {
-    my ($self, @args) = @_;
-    $self->SUPER::execute(@args) or do {
-        Amon2::DBI::Util::handle_error($self->{private_sql}, \@args, $self->errstr);
-    };
-}
-
 sub sql { $_[0]->{private_sql} }
-
-package Amon2::DBI::Util;
-use Carp::Clan qw{^(DBI::|Amon2::DBI::|DBD::)};
-use Data::Dumper ();
-
-sub handle_error {
-    my ( $stmt, $bind, $reason ) = @_;
-
-    local $Data::Dumper::Terse = 1;
-    $stmt =~ s/\n/\n          /gm;
-    my $err = sprintf <<"TRACE", $reason, $stmt, Data::Dumper::Dumper($bind);
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@ Amon2::DBI 's Exception @@@@@
-Reason  : %s
-SQL     : %s
-BIND    : %s
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-TRACE
-    $err =~ s/\n\Z//;
-    croak $err;
-}
-
 
 1;
 __END__
