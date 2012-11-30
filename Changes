@@ -1,5 +1,9 @@
 Revision history for Perl extension Amon2::DBI
 
+0.31
+
+    - fixed cicric reference
+
 0.30
 
     [INCOMPATBILE CHANGE]
