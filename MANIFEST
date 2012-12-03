@@ -21,6 +21,7 @@ t/02_integrate.t
 t/03_callbacks.t
 t/05_mysql.t
 t/06_pg.t
+t/07_nested_transaction.t
 xt/01_podspell.t
 xt/02_perlcritic.t
 xt/03_pod.t

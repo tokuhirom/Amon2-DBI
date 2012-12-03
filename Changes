@@ -1,7 +1,13 @@
 Revision history for Perl extension Amon2::DBI
 
+0.32
+
+    - Fixed transaction management bug introduced in 0.31.
+      The version is completely broken. DO NOT USE IT.
+
 0.31
 
+    [BROKEN VERSION. DO NOT USE THIS VERSION.]
     - fixed cicric reference
 
 0.30
