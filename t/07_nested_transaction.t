@@ -3,7 +3,7 @@ use warnings;
 use utf8;
 use Test::More;
 use Amon2::DBI;
-use Test::Requires 'DBD::SQLite', 'Test::Memory::Cycle';
+use Test::Requires 'DBD::SQLite';
 
 my $COUNTER = 0;
 {
