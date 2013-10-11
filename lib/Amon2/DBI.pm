@@ -124,11 +124,11 @@ Amon2::DBI is-a DBI. And Amon2::DBI provides some additional methods.
 
 =over 4
 
-=item $dbh->do_i(@args);
+=item C<< $dbh->do_i(@args); >>
 
 Amon2::DBI uses L<SQL::Interp> as a SQL generator. Amon2::DBI generate SQL using @args and do it.
 
-=item $dbh->insert($table, \%row);
+=item C<< $dbh->insert($table, \%row); >>
 
 It's equivalent to following statement:
 
