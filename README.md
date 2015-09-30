@@ -25,7 +25,7 @@ Amon2::DBI is a simple DBI wrapper. It provides better usability for you.
 
 - Nested transaction management.
 
-    Amon2::DBI supports nested transaction management based on RAII like DBIx::Class or DBIx::Skinny. It uses [DBIx::TransactionManager](http://search.cpan.org/perldoc?DBIx::TransactionManager) internally.
+    Amon2::DBI supports nested transaction management based on RAII like DBIx::Class or DBIx::Skinny. It uses [DBIx::TransactionManager](https://metacpan.org/pod/DBIx::TransactionManager) internally.
 
 - Raising error when you occurred.
 
@@ -37,7 +37,7 @@ Amon2::DBI is-a DBI. And Amon2::DBI provides some additional methods.
 
 - `$dbh->do_i(@args);`
 
-    Amon2::DBI uses [SQL::Interp](http://search.cpan.org/perldoc?SQL::Interp) as a SQL generator. Amon2::DBI generate SQL using @args and do it.
+    Amon2::DBI uses [SQL::Interp](https://metacpan.org/pod/SQL::Interp) as a SQL generator. Amon2::DBI generate SQL using @args and do it.
 
 - `$dbh->insert($table, \%row);`
 
@@ -47,7 +47,7 @@ Amon2::DBI is-a DBI. And Amon2::DBI provides some additional methods.
 
 # AUTHOR
 
-Tokuhiro Matsuno <tokuhirom AAJKLFJEF@ GMAIL COM>
+Tokuhiro Matsuno &lt;tokuhirom AAJKLFJEF@ GMAIL COM>
 
 # SEE ALSO
 

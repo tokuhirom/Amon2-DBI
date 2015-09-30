@@ -1,5 +1,11 @@
 Revision history for Perl module Amon2::DBI
 
+{{$NEXT}}
+
+0.33 2015-09-30T06:52:06Z
+
+    - testing fix
+
 0.32 2012-12-03
 
     - Fixed transaction management bug introduced in 0.31.
